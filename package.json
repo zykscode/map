@@ -75,6 +75,7 @@
     "autoprefixer": "^10.4.13",
     "eslint": "8.26.0",
     "eslint-config-next": "^13.0.5",
+    "json-loader": "^0.5.7",
     "postcss": "^8.4.19",
     "prettier": "2.7.1",
     "prettier-plugin-tailwindcss": "0.1.13",

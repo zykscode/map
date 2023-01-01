@@ -1,9 +1,3 @@
-import CountdownContainer from '#/components/CountdownContainer';
-import Map from '#/components/Map';
-import { states } from '#/lib/data/data';
-import { naijaMap } from '#/lib/data/naija';
-
-
 
 export default async function Home() {
   console.log({
@@ -16,8 +10,8 @@ export default async function Home() {
   });
   return (
     <div className="">
-      {/* <CountdownContainer /> */}
-    <Map geoJson={states} />
+      home page here
+      
     </div>
   );
 }

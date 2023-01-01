@@ -1,30 +1,32 @@
-'use client'
-import React, { FC, useEffect, useRef } from 'react';
-import { geoPath, geoMercator } from 'd3-geo';
-import d3, { select } from 'd3';
+'use client';
 
-interface MapProps {
-  geoJson: GeoJSON.FeatureCollection<GeoJSON.GeometryObject>;
+import React from 'react';
+import { geoPath, geoMercator } from 'd3-geo';
+
+interface Props {
+  data: GeoJSON.FeatureCollection;
+  width: number;
+  height: number;
 }
 
-const Map: FC<MapProps> = ({ geoJson }) => {
-  const svgRef = useRef<SVGSVGElement>(null);
+const Map: React.FC<Props> = ({ data, width, height }) => {
+  const projection = geoMercator().fitSize([width, height], data);
+  const path = geoPath().projection(projection);
 
-  useEffect(() => {
-    const svg = select(svgRef.current);
-    const projection = geoMercator().fitSize([800, 800], geoJson);
-    const pathGenerator = geoPath().projection(projection);
-
-    svg
-      .selectAll('path')
-      .data(geoJson.features)
-      .join('path')
-      .attr('d', (feature: GeoJSON.Feature<GeoJSON.GeometryObject>) => pathGenerator(feature))
-      .attr('fill', '#ccc')
-      .attr('stroke', '#333');
-  }, [geoJson]);
-
-  return <svg ref={svgRef} width={800} height={800} />;
+  return (
+    <svg width={width} height={height}>
+      <g className="regions">
+        {data.features.map((feature) => (
+          <path
+            key={feature.properties!.adminName}
+            d={path(feature)}
+            className="region hover:fill-pink-200 stroke-blue-400 stroke-[4px]"
+            onClick={() => console.log(feature.properties!.adminName)}
+          />
+        ))}
+      </g>
+    </svg>
+  );
 };
 
 export default Map;
