@@ -1,14 +1,23 @@
-
 import CountdownContainer from '#/components/CountdownContainer';
-import MapChart from '#/components/MapChart';
+import Map from '#/components/Map';
+import { states } from '#/lib/data/data';
+import { naijaMap } from '#/lib/data/naija';
+
 
 
 export default async function Home() {
-  console.log({todo:['stimulate your own result', 'compare that to others', 'save it', 'share it']})
+  console.log({
+    todo: [
+      'stimulate your own result',
+      'compare that to others',
+      'save it',
+      'share it',
+    ],
+  });
   return (
     <div className="">
-        <CountdownContainer/>
-              <MapChart />
+      {/* <CountdownContainer /> */}
+    <Map geoJson={states} />
     </div>
   );
 }

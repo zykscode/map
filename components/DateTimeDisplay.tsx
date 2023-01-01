@@ -1,11 +1,17 @@
-import React from 'react';
+'use client'
+import React, { useEffect } from 'react';
 
-const DateTimeDisplay = ({ value, type, isDanger }) => {
+type DateTimeDisplayProps = {
+  value: number;
+  type: string;
+  isDanger: boolean;
+};
+
+const DateTimeDisplay = ({ value, type, isDanger }: DateTimeDisplayProps) => {
+
   return (
-    <div className={isDanger ? 'countdown danger' : 'countdown'}>
-      <p>{value}</p>
-      <span>{type}</span>
-    </div>
+  <span className={`text-transparent before:contents bg-gradient-to-tr transition-colors bg-clip-text from-[#007cf0] to-[#042423]`}>{value} {" "} {type}</span>
+
   );
 };
 
