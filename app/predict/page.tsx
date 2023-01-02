@@ -1,5 +1,7 @@
 import CountdownContainer from '#/components/CountdownContainer';
+import Logo from '#/components/Logo';
 import Map from '#/components/Map';
+import APC from '#/public/static/images/apc.svg'
 
 import data from '#/lib/data/state.geojson';
 
@@ -13,9 +15,8 @@ export default async function Home() {
     ],
   });
   return (
-    <div className="">
-      <CountdownContainer />
-      <Map data={data} width={960} height={800} />
+    <div className="flex align-top bg-green-300 justify-center">
+      <Map data={data}  />
     </div>
   );
 }
