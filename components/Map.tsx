@@ -2,12 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import { geoPath, geoMercator, GeoPath, GeoPermissibleObjects } from 'd3-geo';
 import { Feature, Geometry, GeoJsonProperties } from 'geojson';
+import MapPath from './MapPath';
 
 interface Props {
   data: GeoJSON.FeatureCollection;
 }
 
-const Map: React.FC<Props> = ({ data }) => {
+const  Map: React.FC<Props> = ({ data }) => {
+  const [zoomedFeature, setZoomedFeature] = useState<Feature<Geometry, GeoJsonProperties> | null>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -35,11 +37,13 @@ const Map: React.FC<Props> = ({ data }) => {
   let path:
     | GeoPath<any, GeoPermissibleObjects>
     | ((arg0: Feature<Geometry, GeoJsonProperties>) => string | undefined);
-  if (windowWidth > 960) {
+  if (zoomedFeature) {
+    projection = geoMercator().fitSize([960, 800], zoomedFeature);
+    path = geoPath().projection(projection);
+  } else if (windowWidth > 960) {
     projection = geoMercator().fitSize([960, 800], data);
     path = geoPath().projection(projection);
   } else {
-    console.log(window.innerWidth);
     projection = geoMercator().fitSize(
       [
         dimensions.width - 32 || window.innerWidth,
@@ -63,11 +67,13 @@ const Map: React.FC<Props> = ({ data }) => {
     >
       <g className="regions">
         {data.features.map((feature) => (
-          <path
+          <MapPath
             key={feature.properties!.adminName}
-            d={path(feature)}
-            className="region stroke-blue-400 stroke-[1px] hover:fill-pink-200"
-            onClick={() => console.log(feature.properties!.adminName)}
+            feature={feature}
+            path={path}
+            onClick={() => {
+              setZoomedFeature(feature);
+            }}
           />
         ))}
       </g>
