@@ -1,6 +1,7 @@
 import CountdownContainer from '#/components/CountdownContainer';
 import '#/styles/globals.css';
 import '#/styles/style.scss';
+import '#/styles/leaflet.css';
 
 export default function RootLayout({
   children,

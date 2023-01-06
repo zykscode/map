@@ -54,6 +54,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "7.40.0",
     "react-leaflet": "^4.2.0",
+    "react-resize-observer": "^1.1.1",
     "reading-time": "^1.5.0",
     "rehype-citation": "^0.4.0",
     "rehype-katex": "^6.0.2",

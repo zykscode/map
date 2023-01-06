@@ -5,7 +5,8 @@ import APC from '#/public/static/images/apc.svg'
 import CandidateCard from '#/components/CandidateCard';
 import data from '#/lib/data/state.geojson'
 import { csv,json } from 'd3';
-import NewMap from '#/components/NewMap';
+
+
 
 export default async function Home() {
   console.log({
@@ -21,8 +22,8 @@ export default async function Home() {
   return (
     <div className="flex bg-blue-500 align-top justify-center">
 {/* <CandidateCard name={'Tinubu'} age={70} party={'APC'}/> */}
-      {/* <Map data={data}  /> */}
-      <NewMap data={data}/>
+       <Map data={data}/> 
+
     </div>
   );
 }
