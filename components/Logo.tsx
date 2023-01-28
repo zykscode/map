@@ -1,17 +1,9 @@
-import Image from 'next/image'
-import React from 'react'
+import Image from 'next/image';
+import React from 'react';
+import logo from '#/public/static/images/me.png';
 
-type Props = {
-    src:string
-    alt?:string
-}
+const Logo = () => {
+  return <Image src={logo} alt={'site Logo'} className='rounded-full h-10 w-10' />;
+};
 
-function Logo({src, alt}: Props) {
-  return (
-    <div className='h-8 w-8 rounded-full bg-blue-400 '>
-        <Image src={src} alt={alt||'party logo'}/>
-    </div>
-  )
-}
-
-export default Logo
+export default Logo;

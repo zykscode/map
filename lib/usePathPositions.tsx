@@ -25,7 +25,7 @@ const usePathPositions = ({ paths, container }: UsePathPositionsProps): Position
       const xInPx = x - containerRect.x;
       const yInPx = y - containerRect.y;
       const key = path.getAttribute('id');
-      return { x: xInPx, y: yInPx, key };
+      return { x: xInPx, y: yInPx, key } as Position;
     });
     setPositions(pathPositions);
   }, [paths, container]);

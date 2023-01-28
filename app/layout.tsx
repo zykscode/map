@@ -1,7 +1,8 @@
-import CountdownContainer from '#/components/CountdownContainer';
 import '#/styles/globals.css';
 import '#/styles/style.scss';
 import '#/styles/leaflet.css';
+import { Footer } from '#/components/Footer';
+import Header from '#/components/header/Header';
 
 export default function RootLayout({
   children,
@@ -15,10 +16,17 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body className="app">
-      {/* <CountdownContainer /> */}
-        {children}
-        </body>
+      <body className="app notion">
+        <div className="viewpoint"></div>
+        <div className="frame">
+          <Header />
+          <div className="page-scroller">
+           {children}  
+          </div>
+         
+        </div>
+        <Footer />
+      </body>
     </html>
   );
 }

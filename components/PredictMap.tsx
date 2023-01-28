@@ -1,12 +1,8 @@
 'use client';
 
 import { usePathPositions } from '#/lib/usePathPositions';
-import {
-  geoMercator,
-  geoPath,
-  GeoPath,
-  GeoPermissibleObjects,
-} from 'd3-geo';
+import usePopup from '#/lib/usePopup';
+import { geoMercator, geoPath, GeoPath, GeoPermissibleObjects } from 'd3-geo';
 import {
   Feature,
   FeatureCollection,
@@ -14,15 +10,19 @@ import {
   Geometry,
 } from 'geojson';
 import React, { FC, useEffect, useRef, useState } from 'react';
-import MapPath from './MapPath';
+import PredictMapPath from './PredictMapPath';
 
 interface Props {
   data: GeoJSON.FeatureCollection;
 }
 
-const Map: FC<Props> = ({ data }) => {
+const PredictMap: FC<Props> = ({ data }) => {
   const initialProjection = () => geoMercator().fitSize([100, 100], data);
+  const [total, setTotal] = useState(0);
+  const [popupDisplay, setPopupDisplay] = useState(false);
 
+
+  console.log(popupDisplay);
   const [projections, setProjection] = useState(initialProjection);
   useEffect(() => {
     function handleResize() {
@@ -45,22 +45,20 @@ const Map: FC<Props> = ({ data }) => {
   const positions = usePathPositions({ paths: data, container: containerRef });
 
   return (
-    <div className="container lg:h-[800px] lg:w-[800px] bg-green-500">
+    <div className="container bg-green-500 lg:h-[800px] lg:w-[800px]">
       <svg ref={containerRef} viewBox="0 0 100 100">
         {' '}
         <g className="regions">
           {data.features.map((feature) => (
-            <MapPath
+            <PredictMapPath
               key={feature.properties!.lganame || feature.properties!.adminName}
-             
               feature={feature}
               path={path}
             />
           ))}
         </g>
-     
-      </svg> 
-         {/* <div className="absolute bg-green-300 z-40 top-0"> {positions.map(({ x, y, key }) => (
+      </svg>
+      {/* <div className="absolute bg-green-300 z-40 top-0"> {positions.map(({ x, y, key }) => (
         
          <div
            key={key}
@@ -79,4 +77,4 @@ const Map: FC<Props> = ({ data }) => {
   );
 };
 
-export default Map;
+export default PredictMap;

@@ -1,3 +1,4 @@
+import CountdownContainer from "#/components/CountdownContainer";
 
 export default async function Home() {
   console.log({
@@ -9,9 +10,9 @@ export default async function Home() {
     ],
   });
   return (
-    <div className="">
-      home page here
+    <main className="page full-page index-page">
+       <CountdownContainer /> 
       
-    </div>
+    </main>
   );
 }
