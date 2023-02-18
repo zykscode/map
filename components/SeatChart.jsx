@@ -149,7 +149,7 @@ const SeatChart = ({
         {
           x: 0,
           y: 0,
-          key:'number',
+          key: 'number',
           textAnchor: 'middle',
           style: {
             fontFamily: 'Helvetica',
@@ -172,7 +172,7 @@ const SeatChart = ({
         radius + a
       }`,
     },
-    elements
+    elements,
   );
 };
 
