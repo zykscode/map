@@ -154,6 +154,7 @@ const SeatChart = ({
           style: {
             fontFamily: 'Helvetica',
             fontSize: `${0.25 * radius}px`,
+            fill: 'var(--fg-color)',
           },
           className: 'seatNumber',
         },

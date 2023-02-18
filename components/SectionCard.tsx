@@ -30,7 +30,7 @@ const SectionCard = ({
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 640);
+      setIsMobile(window.innerWidth < 960);
     };
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -63,19 +63,37 @@ const SectionCard = ({
           })),
         ]}
       />
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 sm:grid-cols-2 md:px-8">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 md:px-8 medium:grid-cols-2">
         <div className="lg:order-2">
           <div className="flex flex-col justify-center gap-4 p-4">
             {isMobile ? (
-              <div className=" ">
-                <ParliamentChart
-                  name={partyName}
-                  seatCount={true}
-                  party={partyChart}
-                />
-              </div>
+              <>
+                <div className="small:hidden">
+                  <ParliamentChart
+                    name={partyName}
+                    seatCount={true}
+                    party={partyChart}
+                  />
+                </div>
+                <div className="hidden justify-center gap-8 small:flex ">
+                  <div className="">
+                    <ParliamentChart
+                      name="Senate"
+                      seatCount={true}
+                      party={senateParties}
+                    />
+                  </div>
+                  <div className="">
+                    <ParliamentChart
+                      name="House of Representatives"
+                      seatCount={true}
+                      party={repParties}
+                    />
+                  </div>
+                </div>
+              </>
             ) : (
-              <div className="flex flex-col justify-center gap-4 2xl:flex-row">
+              <div className="flex justify-center gap-4 medium:flex-row">
                 <div className="">
                   <ParliamentChart
                     name="Senate"
