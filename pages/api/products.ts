@@ -1,5 +1,6 @@
-import type { Product } from '#/types/Product';
 import type { NextRequest } from 'next/server';
+
+import type { Product } from '#/types/Product';
 
 export const config = {
   runtime: 'edge',
