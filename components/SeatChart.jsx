@@ -123,7 +123,7 @@ const generatePoints = (parliament, r0) => {
 
 const pointToSVG = (hFn) => (point, index) =>
   hFn('circle', {
-    key: `seat ${index}`,
+    key: `${point.x} ${index}`,
     cx: point.x,
     cy: point.y,
     r: point.r,
@@ -149,6 +149,7 @@ const SeatChart = ({
         {
           x: 0,
           y: 0,
+          key:'number',
           textAnchor: 'middle',
           style: {
             fontFamily: 'Helvetica',
@@ -171,7 +172,7 @@ const SeatChart = ({
         radius + a
       }`,
     },
-    elements,
+    elements
   );
 };
 
