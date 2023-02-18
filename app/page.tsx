@@ -38,7 +38,7 @@ export default async function Home() {
         path={'elections'}
         tabs={years}
       >
-        <div className="lg:order-1">
+        <div className=" order-1 bg-green-600 px-4">
           <ResultMap map={map} data={data as unknown as ElectionsResults} />
         </div>
       </SectionCard>

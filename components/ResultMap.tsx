@@ -40,35 +40,41 @@ const ResultMap: FC<Props> = ({ map, data }) => {
   };
 
   return (
-    <svg ref={containerRef} viewBox="0 0 100 100">
-      {' '}
-      <g className="regions">
-        {map.features.map((feature) => {
-          const stateResults = result.find(
-            (r) =>
-              r.state === feature.properties!.lganame ||
-              r.state === feature.properties!.adminName,
-          );
-          if (!stateResults) return null;
+    <div className="relative bg-blue-500">
+      <svg ref={containerRef} viewBox="0 0 100 100">
+        {' '}
+        <g className="regions">
+          {map.features.map((feature) => {
+            const stateResults = result.find(
+              (r) =>
+                r.state === feature.properties!.lganame ||
+                r.state === feature.properties!.adminName,
+            );
+            if (!stateResults) return null;
 
-          const { winner, turnout, partyVotes } = stateResults;
+            const { winner, turnout, partyVotes } = stateResults;
 
-          const winningPartyColor = partyColors[winner] || 'gray';
+            const winningPartyColor = partyColors[winner] || 'gray';
 
-          return (
-            <MapPath
-              key={feature.properties!.lganame || feature.properties!.adminName}
-              feature={feature}
-              path={path}
-              winner={winner}
-              turnout={turnout}
-              fill={winningPartyColor}
-              partyVotes={partyVotes}
-            />
-          );
-        })}
-      </g>
-    </svg>
+            return (
+              <MapPath
+                key={
+                  feature.properties!.lganame || feature.properties!.adminName
+                }
+                feature={feature}
+                path={path}
+                winner={winner}
+                turnout={turnout}
+                fill={winningPartyColor}
+                partyVotes={partyVotes}
+              />
+            );
+          })}
+        </g>
+      </svg>
+      <div className="absolute bottom-0 right-0 h-1/4 w-2/5 bg-yellow-500">
+      </div>
+    </div>
   );
 };
 
