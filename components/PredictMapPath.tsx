@@ -1,8 +1,12 @@
+/* eslint-disable tailwindcss/no-custom-classname */
+
 'use client';
+
+import type { GeoPath, GeoPermissibleObjects } from 'd3-geo';
+import type { Feature, GeoJsonProperties, Geometry } from 'geojson';
+import React, { useRef, useState } from 'react';
+
 import usePopup from '#/lib/usePopup';
-import { GeoPath, GeoPermissibleObjects } from 'd3-geo';
-import { Feature, Geometry, GeoJsonProperties } from 'geojson';
-import React, { useEffect, useRef, useState } from 'react';
 
 interface PredictMapPathProps {
   // The GeoJSON feature to render
@@ -15,31 +19,25 @@ interface PredictMapPathProps {
   onClick?: (event: React.MouseEvent<SVGPathElement>) => void;
 }
 
-interface StateInfo{
-    display:boolean
-}
 
 const PredictMapPath: React.FC<PredictMapPathProps> = ({
   feature,
   path,
-  onClick,
 }) => {
-    const [popupDisplay,setPopupDisplay] = useState(false)
-    const {popup, setPopup} = usePopup()
-    const [info, setInfo] = useState({display:popupDisplay})
+  const [popupDisplay] = useState(false);
+  const { popup, setPopup } = usePopup();
+  const [info, setInfo] = useState({ display: popupDisplay });
   const id = feature.properties!.lganame || feature.properties!.adminName;
   const pathRef = useRef<SVGPathElement>(null);
-  let allRegions = Array.from(document.getElementsByClassName('region'))
   const handleClick = () => {
- // allRegions.filter((a)=>a.classList.contains('active')).map(a=>a.classList.toggle('active'))
-    setPopup(true)
-    console.log('popup in predictPath:',popup)
+    // allRegions.filter((a)=>a.classList.contains('active')).map(a=>a.classList.toggle('active'))
+    setPopup(true);
+    console.log('popup in predictPath:', popup);
     if (pathRef.current) {
       const bbox = pathRef.current.getBBox();
       const x = bbox.x + bbox.width / 2;
       const y = bbox.y + bbox.height / 2;
       console.log(`The middle of the path is at x: ${x}, y: ${y}`);
-      
     }
   };
 
@@ -47,9 +45,11 @@ const PredictMapPath: React.FC<PredictMapPathProps> = ({
     <path
       ref={pathRef}
       id={id}
-      d={path(feature)}
-      className={`${popupDisplay?'active':''}  region  stroke-blue-400 stroke-[0.1px] hover:fill-pink-200`}
-      onClick={(e) => {
+      d={path(feature)!}
+      className={`${
+        popupDisplay ? 'active' : ''
+      }  region  stroke-blue-400 stroke-[0.1px] hover:fill-pink-200`}
+      onClick={() => {
         handleClick();
       }}
     ></path>

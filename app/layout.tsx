@@ -1,6 +1,8 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import '#/styles/globals.css';
 import '#/styles/style.scss';
 import '#/styles/leaflet.css';
+
 import { Footer } from '#/components/Footer';
 import Header from '#/components/header/Header';
 
@@ -20,10 +22,7 @@ export default function RootLayout({
         <div className="viewpoint"></div>
         <div className="frame">
           <Header />
-          <div className="page-scroller">
-           {children}  
-          </div>
-         
+          <div className="page-scroller">{children}</div>
         </div>
         <Footer />
       </body>

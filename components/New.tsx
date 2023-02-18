@@ -13,9 +13,21 @@ interface MapPathProps {
   // An optional click handler for the path
   onClick?: (event: React.MouseEvent<SVGPathElement>) => void;
   toggleOptions?: any;
+  fill?: string;
+  winner?: string;
+  turnout?: number;
+  partyVotes?: any;
 }
 
-const MapPath: React.FC<MapPathProps> = ({ feature, path, toggleOptions }) => {
+const MapPath: React.FC<MapPathProps> = ({
+  feature,
+  path,
+  toggleOptions,
+  fill,
+  // winner,
+  // turnout,
+  // partyVotes
+}) => {
   const id = feature.properties!.lganame || feature.properties!.adminName;
   const pathRef = useRef<SVGPathElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -33,7 +45,8 @@ const MapPath: React.FC<MapPathProps> = ({ feature, path, toggleOptions }) => {
       d={path(feature)!}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={` region fill-[var(--blue-background)]  stroke-[black] stroke-[0.1px] hover:fill-gray-300`}
+      className={`region stroke-[black] stroke-[0.1px] hover:fill-gray-300`}
+      style={{ fill }}
       onClick={toggleOptions}
     >
       {isHovered && (

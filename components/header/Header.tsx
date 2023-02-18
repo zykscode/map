@@ -1,10 +1,10 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import React from 'react';
+
 import Breadcrumbs from '../Breaadcrumbs';
 import Navbar from './Navbar';
 
-type Props = {};
-
-export default function Header({}: Props) {
+export default function Header() {
   return (
     <header className="header">
       <div className="nav-header">

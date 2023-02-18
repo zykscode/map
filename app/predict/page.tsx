@@ -1,18 +1,18 @@
+/* eslint-disable tailwindcss/no-custom-classname */
+import type { FeatureCollection } from 'geojson';
+
 import PredictMap from '#/components/PredictMap';
-import data from '#/lib/data/state.geojson';
-import { csv, json } from 'd3';
+import data from '#/lib/data/state.json';
 
 export default async function Home() {
   return (
     <div className="page full-page   ">
       {/* <CandidateCard name={'Tinubu'} age={70} party={'APC'}/> */}
 
-      <PredictMap data={data} />
+      <PredictMap data={data as FeatureCollection} />
 
       <div className="info">
-        <span id='state-name' className='state-title'>
-
-        </span>
+        <span id="state-name" className="state-title"></span>
       </div>
     </div>
   );

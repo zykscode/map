@@ -1,14 +1,12 @@
-import { navs } from '#/lib/data/siteMetadata';
+/* eslint-disable tailwindcss/no-custom-classname */
 import Link from 'next/link';
 import React from 'react';
-import Button from '../Button';
-import Logo from '../Logo';
-import Toggle from '../mobile/Toggle';
+
+import { navs } from '#/lib/data/siteMetadata';
+
 import ToggleThemeButton from '../ToggleThemeButton';
 
-type Props = {};
-
-const Navbar = (props: Props) => {
+const Navbar = () => {
   return (
     <nav className="nav-header-rhs breadcrumbs">
       {navs.map((nav) => {

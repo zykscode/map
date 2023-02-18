@@ -1,4 +1,6 @@
-export const makeup = {
+import type { Makeup } from '#/lib/types';
+
+export const makeup: Makeup = {
   2023: {
     senate: {
       partyMakeup: {
