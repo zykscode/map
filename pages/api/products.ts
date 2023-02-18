@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable no-promise-executor-return */
 import type { NextRequest } from 'next/server';
 
-import type { Product } from '#/types/Product';
+import type { Product } from '#/lib/types';
 
 export const config = {
   runtime: 'edge',
 };
+let products = data;
 
 export default async function handler(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -41,8 +44,6 @@ export default async function handler(req: NextRequest) {
       },
     });
   }
-
-  let products = data;
 
   const filter = searchParams.get('filter');
   if (filter) {
