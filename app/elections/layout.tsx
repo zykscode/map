@@ -1,4 +1,3 @@
-import SectionCard from '#/components/SectionCard';
 import { fetchYears } from '#/lib/getYears';
 
 export default async function Layout({
@@ -8,13 +7,14 @@ export default async function Layout({
 }) {
   const years = await fetchYears();
   return (
-    <SectionCard
-      path={'elections'}
-      tabs={years}
-      repParties={[]}
-      senateParties={[]}
-    >
-      {children}
-    </SectionCard>
+    <h1>{years[0].slug}</h1>
+    // <SectionCard
+    //   path={'elections'}
+    //   tabs={years}
+    //   repParties={[]}
+    //   senateParties={[]}
+    // >
+    //   {children}
+    // </SectionCard>
   );
 }
