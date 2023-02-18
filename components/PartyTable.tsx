@@ -6,15 +6,17 @@ type Props = {
   party: Party[];
   handleColorChange: (name: string, color: string) => void;
   partyColors: any;
+  ref?: string;
 };
 
 export const PartyTable = ({
   party,
+  ref = 'seats',
   handleColorChange,
   partyColors,
 }: Props) => {
   return (
-    <div className="relative mx-auto h-[200px] overflow-x-auto shadow-md sm:rounded-lg">
+    <div className="relative mx-auto max-h-[200px] overflow-x-auto shadow-md sm:rounded-lg">
       <table className=" text-left text-sm">
         <thead className="sticky top-0 z-50 bg-[var(--gray-background)] text-xs uppercase">
           <tr className="">
@@ -25,7 +27,7 @@ export const PartyTable = ({
               Colour
             </th>
             <th scope="col" className="px-2 py-3">
-              Seats
+              {ref}
             </th>
           </tr>
         </thead>

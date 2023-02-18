@@ -38,7 +38,12 @@ const ResultMap: FC<Props> = ({ map, data }) => {
     // Add more party-color pairs as needed
     Other: 'gray',
   };
+  const [selectedState, setSelectedState] = useState(null);
+  const handleClick = (state) => {
+    setSelectedState(state);
+  };
 
+  console.log(result);
   return (
     <div className="relative bg-blue-500">
       <svg ref={containerRef} viewBox="0 0 100 100">
@@ -67,12 +72,21 @@ const ResultMap: FC<Props> = ({ map, data }) => {
                 turnout={turnout}
                 fill={winningPartyColor}
                 partyVotes={partyVotes}
+                onClick={() => handleClick(stateResults)}
               />
             );
           })}
         </g>
       </svg>
-      <div className="absolute bottom-0 right-0 h-1/4 w-2/5 bg-yellow-500"></div>
+      <div className="absolute bottom-0 right-0 h-1/4 w-2/5 bg-yellow-500">
+        {selectedState && (
+          <div>
+            <p>Winner: {selectedState.winner}</p>
+            <p>Turnout: {selectedState.turnout}</p>
+            <p>Party Votes: {JSON.stringify(selectedState.partyVotes)}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

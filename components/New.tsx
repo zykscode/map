@@ -24,6 +24,7 @@ const MapPath: React.FC<MapPathProps> = ({
   path,
   toggleOptions,
   fill,
+  onClick,
   // winner,
   // turnout,
   // partyVotes
@@ -47,7 +48,7 @@ const MapPath: React.FC<MapPathProps> = ({
       onMouseLeave={handleMouseLeave}
       className={`region stroke-[black] stroke-[0.1px] hover:fill-gray-300`}
       style={{ fill }}
-      onClick={toggleOptions}
+      onClick={onClick}
     >
       {isHovered && (
         <title>
