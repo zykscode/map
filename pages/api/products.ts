@@ -1,62 +1,8 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable no-promise-executor-return */
 import type { NextRequest } from 'next/server';
 
 import type { Product } from '#/lib/types';
-
-export const config = {
-  runtime: 'edge',
-};
-let products = data;
-
-export default async function handler(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const id = searchParams.get('id');
-  const delay = searchParams.get('delay');
-
-  if (delay) {
-    await new Promise((resolve) => setTimeout(resolve, Number(delay)));
-  }
-
-  if (id) {
-    let product = data.find((product) => product.id === id);
-
-    if (!product) {
-      return new Response(null, {
-        status: 404,
-      });
-    }
-
-    const fields = searchParams.get('fields');
-    if (fields) {
-      product = fields.split(',').reduce((acc, field) => {
-        // @ts-ignore
-        acc[field] = product[field];
-
-        return acc;
-      }, {} as Product);
-    }
-
-    return new Response(JSON.stringify(product), {
-      status: 200,
-      headers: {
-        'content-type': 'application/json',
-      },
-    });
-  }
-
-  const filter = searchParams.get('filter');
-  if (filter) {
-    products = products.filter((product) => product.id !== filter);
-  }
-
-  return new Response(JSON.stringify(products), {
-    status: 200,
-    headers: {
-      'content-type': 'application/json',
-    },
-  });
-}
 
 const data: Product[] = [
   {
@@ -152,3 +98,58 @@ const data: Product[] = [
       'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QCMRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABIAAAAAQAAAEgAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAAqgAwAEAAAAAQAAAAoAAAAA/8AAEQgACgAKAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMAAgICAgICAwICAwUDAwMFBgUFBQUGCAYGBgYGCAoICAgICAgKCgoKCgoKCgwMDAwMDA4ODg4ODw8PDw8PDw8PD//bAEMBAgICBAQEBwQEBxALCQsQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEP/dAAQAAf/aAAwDAQACEQMRAD8A9P8Aj/qni3w58aNel0PV9UENm3lraDUfLtpJJLeOMKlqwXYELGRX3/M3zD3/AE5tPDB+yQ7pFc7FySeTx1NeX+PfhF8J/FPjI+IfE3grRNX1UPC4u7zTba4uN0f3D5skbPlf4TnjtXvcdrbLGoEKAADjaKpQa3Z1Od9j/9k=',
   },
 ];
+
+export const config = {
+  runtime: 'edge',
+};
+
+export default async function handler(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get('id');
+  const delay = searchParams.get('delay');
+
+  if (delay) {
+    await new Promise((resolve) => setTimeout(resolve, Number(delay)));
+  }
+
+  if (id) {
+    let product = data.find((product) => product.id === id);
+
+    if (!product) {
+      return new Response(null, {
+        status: 404,
+      });
+    }
+
+    const fields = searchParams.get('fields');
+    if (fields) {
+      product = fields.split(',').reduce((acc, field) => {
+        // @ts-ignore
+        acc[field] = product[field];
+
+        return acc;
+      }, {} as Product);
+    }
+
+    return new Response(JSON.stringify(product), {
+      status: 200,
+      headers: {
+        'content-type': 'application/json',
+      },
+    });
+  }
+
+  let products = data;
+
+  const filter = searchParams.get('filter');
+  if (filter) {
+    products = products.filter((product) => product.id !== filter);
+  }
+
+  return new Response(JSON.stringify(products), {
+    status: 200,
+    headers: {
+      'content-type': 'application/json',
+    },
+  });
+}
