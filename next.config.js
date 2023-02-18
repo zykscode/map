@@ -16,6 +16,7 @@ const nextConfig = {
   experimental: {
     // Required:
     appDir: true,
+    typedRoutes: true,
   },
   images: {
     remotePatterns: [
