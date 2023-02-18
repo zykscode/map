@@ -72,8 +72,7 @@ const ResultMap: FC<Props> = ({ map, data }) => {
           })}
         </g>
       </svg>
-      <div className="absolute bottom-0 right-0 h-1/4 w-2/5 bg-yellow-500">
-      </div>
+      <div className="absolute bottom-0 right-0 h-1/4 w-2/5 bg-yellow-500"></div>
     </div>
   );
 };
