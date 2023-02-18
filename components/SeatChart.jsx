@@ -121,13 +121,14 @@ const generatePoints = (parliament, r0) => {
   return merge(points);
 };
 
-const pointToSVG = (hFn) => (point) =>
+const pointToSVG = (hFn) => (point, index) =>
   hFn('circle', {
+    key: `seat ${index}`,
     cx: point.x,
     cy: point.y,
     r: point.r,
     fill: point.fill,
-    class: point.party,
+    className: point.party,
   });
 
 const SeatChart = ({
@@ -138,8 +139,9 @@ const SeatChart = ({
   const radius = 20;
   const points = generatePoints(parliament, radius);
   const a = points[0].r / 0.4;
-  const elements = points.map(pointToSVG(hFunction));
-
+  const elements = points.map((point, index) =>
+    pointToSVG(hFunction)(point, index),
+  );
   if (seatCount) {
     elements.push(
       hFunction(
@@ -147,10 +149,10 @@ const SeatChart = ({
         {
           x: 0,
           y: 0,
-          'text-anchor': 'middle',
+          textAnchor: 'middle',
           style: {
-            'font-family': 'Helvetica',
-            'font-size': `${0.25 * radius}px`,
+            fontFamily: 'Helvetica',
+            fontSize: `${0.25 * radius}px`,
           },
           className: 'seatNumber',
         },
