@@ -9,13 +9,11 @@ import { useDarkMode } from '#/lib/use-dark-mode';
 
 import styles from './styles.module.css';
 
-type Props = {};
-
 const ToggleThemeButton = () => {
   const [hasMounted, setHasMounted] = useState(false);
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
-  const { systemTheme, theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
 
   const onToggleDarkMode = React.useCallback(
     (e: { preventDefault: () => void }) => {

@@ -1,13 +1,9 @@
-'use client'
-import React from 'react'
+'use client';
 
-type Props = {}
+import React from 'react';
 
-const MapContainer = (props: Props) => {
-    
-  return (
-    <div className=''>MapContainer</div>
-  )
-}
+const MapContainer = () => {
+  return <div className="">MapContainer</div>;
+};
 
-export default MapContainer
+export default MapContainer;

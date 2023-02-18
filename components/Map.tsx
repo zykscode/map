@@ -1,4 +1,7 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable tailwindcss/no-custom-classname */
+
 'use client';
 
 import type { GeoPath, GeoPermissibleObjects } from 'd3-geo';

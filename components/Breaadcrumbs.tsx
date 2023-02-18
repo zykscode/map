@@ -1,10 +1,9 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import React from 'react';
+
 import Logo from './Logo';
 
-
-type Props = {};
-
-const Breadcrumbs = (props: Props) => {
+const Breadcrumbs = () => {
   console.log({ todo: 'add site name' });
   return (
     <div className="breadcrumbs">

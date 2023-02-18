@@ -1,14 +1,15 @@
+/* eslint-disable tailwindcss/no-custom-classname */
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-shadow */
+
 'use client';
 
-import {
-  geoAlbers,
-  geoMercator,
-  geoPath,
-  GeoPath,
-  GeoPermissibleObjects,
-} from 'd3-geo';
-import { Feature, GeoJsonProperties, Geometry } from 'geojson';
-import React, { FC, useEffect, useRef, useState } from 'react';
+import type { GeoPath, GeoPermissibleObjects } from 'd3-geo';
+import { geoMercator, geoPath } from 'd3-geo';
+import type { Feature, GeoJsonProperties, Geometry } from 'geojson';
+import type { FC } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+
 import MapPath from './MapPath';
 
 interface Props {
@@ -55,16 +56,13 @@ interface Props {
 //   );
 // };
 
-
 const NewMap: FC<Props> = ({ data }) => {
-  const initialProjection = () =>
-    geoMercator().fitSize([100, 100], data);
+  const initialProjection = () => geoMercator().fitSize([100, 100], data);
 
   const [projections, setProjection] = useState(initialProjection);
   useEffect(() => {
     function handleResize() {
-      const initialProjection = () =>
-        geoMercator().fitSize([100, 100], data);
+      const initialProjection = () => geoMercator().fitSize([100, 100], data);
       setProjection(initialProjection);
     }
 
@@ -82,8 +80,8 @@ const NewMap: FC<Props> = ({ data }) => {
   const containerRef = useRef<SVGSVGElement>(null);
 
   return (
-    <div className="container lg:w-[800px] lg:h-[800px]">
-      <svg ref={containerRef} viewBox="0 0 100 100" >
+    <div className="container lg:h-[800px] lg:w-[800px]">
+      <svg ref={containerRef} viewBox="0 0 100 100">
         <g className="regions">
           {data.features.map((feature) => (
             <MapPath
@@ -97,7 +95,5 @@ const NewMap: FC<Props> = ({ data }) => {
     </div>
   );
 };
-
-
 
 export default NewMap;

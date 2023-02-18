@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-import { navs } from '#/lib/data/siteMetadata';
+import { navs } from '#/data/siteMetadata';
 
 import ToggleThemeButton from '../ToggleThemeButton';
 

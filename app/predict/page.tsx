@@ -2,7 +2,7 @@
 import type { FeatureCollection } from 'geojson';
 
 import PredictMap from '#/components/PredictMap';
-import data from '#/lib/data/state.json';
+import data from '#/data/state.json';
 
 export default async function Home() {
   return (

@@ -1,17 +1,20 @@
-'use client'
-import React, { useEffect } from 'react';
+'use client';
+
+import React from 'react';
 
 type DateTimeDisplayProps = {
   value: number;
   type: string;
-  isDanger: boolean;
+  _isDanger: boolean;
 };
 
-const DateTimeDisplay = ({ value, type, isDanger }: DateTimeDisplayProps) => {
-
+const DateTimeDisplay = ({ value, type, _isDanger }: DateTimeDisplayProps) => {
   return (
-  <span className={`text-transparent before:contents bg-gradient-to-tr transition-colors bg-clip-text from-[#007cf0] to-[#042423]`}>{value} {" "} {type}</span>
-
+    <span
+      className={`bg-gradient-to-tr from-[#007cf0] to-[#042423] bg-clip-text text-transparent transition-colors before:contents`}
+    >
+      {value} {type}
+    </span>
   );
 };
 

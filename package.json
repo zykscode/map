@@ -9,7 +9,7 @@
     "start": "next start",
     "new": "next export",
     "lint": "next lint",
-    "format": "prettier --write \"**/*.{js,ts,tsx,md}\""
+    "format": "next lint --fix && prettier '**/*.{json,yaml}' --write --ignore-path .gitignore"
   },
   "prettier": {
     "arrowParens": "always",
@@ -118,6 +118,7 @@
     "cross-env": "^7.0.3",
     "cssnano": "^5.1.14",
     "cypress": "^12.3.0",
+    "dependency-cruiser": "^12.9.0",
     "eslint": "8.26.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",

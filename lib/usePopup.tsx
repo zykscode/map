@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-
-type Props = {};
+import { useState } from 'react';
 
 const usePopup = () => {
   const [popup, setPopup] = useState(false);

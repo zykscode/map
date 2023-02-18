@@ -19,14 +19,9 @@ interface PredictMapPathProps {
   onClick?: (event: React.MouseEvent<SVGPathElement>) => void;
 }
 
-
-const PredictMapPath: React.FC<PredictMapPathProps> = ({
-  feature,
-  path,
-}) => {
+const PredictMapPath: React.FC<PredictMapPathProps> = ({ feature, path }) => {
   const [popupDisplay] = useState(false);
   const { popup, setPopup } = usePopup();
-  const [info, setInfo] = useState({ display: popupDisplay });
   const id = feature.properties!.lganame || feature.properties!.adminName;
   const pathRef = useRef<SVGPathElement>(null);
   const handleClick = () => {

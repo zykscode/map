@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Position {
   x: number;
@@ -11,9 +11,12 @@ interface UsePathPositionsProps {
   container: React.MutableRefObject<SVGSVGElement>;
 }
 
-const usePathPositions = ({ paths, container }: UsePathPositionsProps): Position[] => {
+const usePathPositions = ({
+  paths,
+  container,
+}: UsePathPositionsProps): Position[] => {
   const [positions, setPositions] = useState<Position[]>([]);
-  
+
   useEffect(() => {
     const pathElements = container.current.querySelectorAll('path');
     const containerRect = container.current.getBoundingClientRect();
