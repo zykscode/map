@@ -1,30 +1,17 @@
-import type { FeatureCollection, GeoJsonProperties, Geometry } from 'geojson';
 import type { ReactNode } from 'react';
-import React from 'react';
+import React, { Children } from 'react';
 
-import type { Party } from '#/lib/types';
-
-import ResultContainer from './ResultContainer';
 import { TabGroup } from './TabGroup';
 
 type Props = {
   children: ReactNode;
-  repParties: Party[];
-  senateParties: Party[];
+
   path: string;
-  map: FeatureCollection<Geometry, GeoJsonProperties>;
-  data: any;
+
   tabs: any[];
 };
 
-const SectionCard = ({
-  tabs,
-  path,
-  repParties,
-  senateParties,
-  data,
-  map,
-}: Props) => {
+const SectionCard = ({ children, tabs, path }: Props) => {
   return (
     <div className="">
       <TabGroup
@@ -39,12 +26,7 @@ const SectionCard = ({
           })),
         ]}
       />
-      <ResultContainer
-        data={data}
-        map={map}
-        repParties={repParties}
-        senateParties={senateParties}
-      />
+      {children}
     </div>
   );
 };

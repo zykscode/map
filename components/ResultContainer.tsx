@@ -4,10 +4,10 @@ import type { FeatureCollection, GeoJsonProperties, Geometry } from 'geojson';
 import type { ReactNode } from 'react';
 import React, { useEffect, useState } from 'react';
 
-import type { ElectionsResults, Party } from '#/lib/types';
+import type { Party } from '#/lib/types';
 
 import ParliamentChart from './ParliamentChart';
-import ResultMap from './ResultMap';
+import ResultCard from './ResultCard';
 
 type Props = {
   children?: ReactNode;
@@ -18,7 +18,7 @@ type Props = {
 };
 
 const ResultContainer = ({ data, map, repParties, senateParties }: Props) => {
-  const [selectedValue, setSelectedValue] = useState('senate');
+  const [selectedValue] = useState('senate');
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const ResultContainer = ({ data, map, repParties, senateParties }: Props) => {
 
   return (
     <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 bg-yellow-400 px-4 md:px-8 medium:grid-cols-2">
-      <div className="order-2 bg-gray-400">
+      <div className="order-2">
         <div className="flex flex-col justify-center gap-4 p-4">
           {isMobile ? (
             <>
@@ -87,7 +87,7 @@ const ResultContainer = ({ data, map, repParties, senateParties }: Props) => {
         </div>
       </div>
       <div className=" order-1 lg:px-4">
-        <ResultMap map={map} data={data as unknown as ElectionsResults} />
+        <ResultCard map={map} data={data} />
       </div>
     </div>
   );

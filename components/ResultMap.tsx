@@ -14,9 +14,11 @@ import MapPath from './New';
 interface Props {
   map: GeoJSON.FeatureCollection;
   data: ElectionsResults;
+  set: React.Dispatch<any>;
+  selectedStates?: any;
 }
 
-const ResultMap: FC<Props> = ({ map, data }) => {
+const ResultMap: FC<Props> = ({ map, data, set }) => {
   const result = useElectionResults(data);
   const initialProjection = () => geoMercator().fitSize([100, 100], map);
   const [projections, setProjection] = useState(initialProjection);
@@ -40,9 +42,8 @@ const ResultMap: FC<Props> = ({ map, data }) => {
     // Add more party-color pairs as needed
     Other: 'gray',
   };
-  const [selectedState, setSelectedState] = useState<any>(null);
   const handleClick = (state: any) => {
-    setSelectedState(state);
+    set(state);
   };
 
   console.log(result);
@@ -80,15 +81,7 @@ const ResultMap: FC<Props> = ({ map, data }) => {
           })}
         </g>
       </svg>
-      <div className="absolute bottom-0 right-0 h-1/4 w-2/5 bg-yellow-500">
-        {selectedState && (
-          <div>
-            <p>Winner: {selectedState.winner}</p>
-            <p>Turnout: {selectedState.turnout}</p>
-            <p>Party Votes: {JSON.stringify(selectedState.partyVotes)}</p>
-          </div>
-        )}
-      </div>
+      <div className="absolute bottom-0 right-0 h-1/4 w-2/5 bg-yellow-500"></div>
     </div>
   );
 };

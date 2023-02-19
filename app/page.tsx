@@ -1,13 +1,12 @@
 import type { FeatureCollection } from 'geojson';
 
 import CountdownContainer from '#/components/CountdownContainer';
-import ResultMap from '#/components/ResultMap';
+import ResultContainer from '#/components/ResultContainer';
 import SectionCard from '#/components/SectionCard';
 import { results } from '#/data/2019';
 import states from '#/data/state.json';
 import { getRep, getSenate } from '#/lib/getData';
 import { fetchYears } from '#/lib/getYears';
-import type { ElectionsResults } from '#/lib/types';
 
 async function getData() {
   const map = states as FeatureCollection;
@@ -32,14 +31,14 @@ export default async function Home() {
   return (
     <main className="w-full">
       <CountdownContainer />
-      <SectionCard
-        repParties={repParties}
-        senateParties={senateParties}
-        path={'elections'}
-        tabs={years}
-        data={data}
-        map={map}
-      />
+      <SectionCard path={'elections'} tabs={years}>
+        <ResultContainer
+          data={data}
+          map={map}
+          repParties={repParties}
+          senateParties={senateParties}
+        />
+      </SectionCard>
     </main>
   );
 }

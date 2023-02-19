@@ -19,8 +19,8 @@ export default function RootLayout({
       */}
       <head />
       <body className="app notion rounded-t-2xl">
-        <div className="viewpoint z-60 bg-blue-600"></div>
-        <div className="frame text-clip rounded-t-2xl bg-pink-400 px-2">
+        <div className="viewpoint z-60"></div>
+        <div className="frame text-clip rounded-t-2xl px-2">
           <Header />
           <div className="page-scroller text-clip rounded-t-2xl">
             {children}
