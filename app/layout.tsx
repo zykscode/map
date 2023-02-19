@@ -18,9 +18,9 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body className="app notion overflow-hidden rounded-t-2xl">
-        <div className="viewpoint"></div>
-        <div className="frame px-2">
+      <body className="app notion rounded-t-2xl">
+        <div className="viewpoint z-60 bg-blue-600"></div>
+        <div className="frame text-clip rounded-t-2xl bg-pink-400 px-2">
           <Header />
           <div className="page-scroller text-clip rounded-t-2xl">
             {children}
