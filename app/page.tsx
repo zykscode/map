@@ -37,11 +37,9 @@ export default async function Home() {
         senateParties={senateParties}
         path={'elections'}
         tabs={years}
-      >
-        <div className=" order-1 lg:px-4">
-          <ResultMap map={map} data={data as unknown as ElectionsResults} />
-        </div>
-      </SectionCard>
+        data={data}
+        map={map}
+      />
     </main>
   );
 }
