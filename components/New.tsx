@@ -22,7 +22,6 @@ interface MapPathProps {
 const MapPath: React.FC<MapPathProps> = ({
   feature,
   path,
-  toggleOptions,
   fill,
   onClick,
   // winner,

@@ -1,3 +1,5 @@
+/* eslint-disable tailwindcss/no-custom-classname */
+
 'use client';
 
 import { geoMercator, geoPath } from 'd3-geo';
@@ -39,7 +41,7 @@ const ResultMap: FC<Props> = ({ map, data }) => {
     Other: 'gray',
   };
   const [selectedState, setSelectedState] = useState<any>(null);
-  const handleClick = (state) => {
+  const handleClick = (state: any) => {
     setSelectedState(state);
   };
 
