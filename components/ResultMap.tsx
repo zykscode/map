@@ -38,7 +38,7 @@ const ResultMap: FC<Props> = ({ map, data }) => {
     // Add more party-color pairs as needed
     Other: 'gray',
   };
-  const [selectedState, setSelectedState] = useState(null);
+  const [selectedState, setSelectedState] = useState<any>(null);
   const handleClick = (state) => {
     setSelectedState(state);
   };

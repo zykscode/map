@@ -6,8 +6,8 @@ import Navbar from './Navbar';
 
 export default function Header() {
   return (
-    <header className="header">
-      <div className="nav-header">
+    <header className="header rounded-t-2xl bg-green-400 ">
+      <div className="nav-header rounded-t-[32px]">
         <Breadcrumbs />
         <Navbar />
       </div>

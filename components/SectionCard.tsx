@@ -63,7 +63,7 @@ const SectionCard = ({
           })),
         ]}
       />
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 md:px-8 medium:grid-cols-2 bg-yellow-400">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 bg-yellow-400 px-4 md:px-8 medium:grid-cols-2">
         <div className="order-2 bg-gray-400">
           <div className="flex flex-col justify-center gap-4 p-4">
             {isMobile ? (
