@@ -49,11 +49,11 @@ const ResultMap: FC<Props> = ({ map, data, set }) => {
   const path = geoPath().projection(projections);
 
   const containerRef = useRef<SVGSVGElement>(null);
-  const handleClick = (state: ElectionsResults[number]) => {
+  const handleClick = (state: any) => {
     set(state);
   };
 
-  const handlePartyColorChange = (party: Party, color: string) => {
+  const handlePartyColorChange = (party: any, color: string) => {
     setPartyColors((prevColors) => ({ ...prevColors, [party]: color }));
   };
 
