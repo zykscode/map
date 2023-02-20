@@ -20,12 +20,16 @@ interface Props {
   selectedStates?: any;
 }
 
+type Party = 'APC' | 'PDP' | 'Other';
+
+type PartyColors = { [key: string]: string };
+
 const ResultMap: FC<Props> = ({ map, data, set }) => {
   const result = useElectionResults(data);
   const partyWins = usePartyWins(result);
   const initialProjection = () => geoMercator().fitSize([100, 100], map);
   const [projections, setProjection] = useState(initialProjection);
-  const [partyColors, setPartyColors] = useState({
+  const [partyColors, setPartyColors] = useState<PartyColors>({
     APC: '#e03e3e',
     PDP: '#4d6461',
     Other: '#9b9a97',
@@ -45,11 +49,11 @@ const ResultMap: FC<Props> = ({ map, data, set }) => {
   const path = geoPath().projection(projections);
 
   const containerRef = useRef<SVGSVGElement>(null);
-  const handleClick = (state: any) => {
+  const handleClick = (state: ElectionsResults[number]) => {
     set(state);
   };
 
-  const handlePartyColorChange = (party: string, color: string) => {
+  const handlePartyColorChange = (party: Party, color: string) => {
     setPartyColors((prevColors) => ({ ...prevColors, [party]: color }));
   };
 
@@ -87,29 +91,39 @@ const ResultMap: FC<Props> = ({ map, data, set }) => {
           })}
         </g>
       </svg>
-      <div className="absolute bottom-0 right-0 h-1/4 w-2/5 bg-yellow-500 p-1">
-        <form className="flex flex-col">
-          <div className="flex gap-2">
-            <label className="flex gap-1">
-              APC
-              <input
-                type="color"
-                className="circle-color-input"
-                value={partyColors.APC}
-                onChange={(e) => handlePartyColorChange('APC', e.target.value)}
-              />
-            </label>
-            <label className="flex">
-              PDP
-              <input
-                className="circle-color-input"
-                type="color"
-                value={partyColors.PDP}
-                onChange={(e) => handlePartyColorChange('PDP', e.target.value)}
-              />
-            </label>
-          </div>
-        </form>{' '}
+      <div className="w-3/7 absolute right-0 bottom-0 h-1/4 bg-yellow-500 px-1">
+        <div className="max-h-full overflow-auto">
+          <table className="w-full text-left text-sm">
+            <thead className="sticky top-0 z-50 bg-[var(--gray-background)] text-xs uppercase">
+              <tr>
+                <th className="px-1">Party</th>
+                <th className="px-1">Colour</th>
+                <th className="px-1">States</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(partyWins)
+                .filter(([state]) => state !== 'FCT')
+                .map(([party, count]) => (
+                  <tr key={party}>
+                    <td className="font-small p-1">{party}</td>
+                    <td className="p-1">
+                      <input
+                        value={partyColors[party]}
+                        title="party color"
+                        type="color"
+                        className="circle-color-input"
+                        onChange={(e) =>
+                          handlePartyColorChange(party, e.target.value)
+                        }
+                      />
+                    </td>
+                    <td className="p-1">{count}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
