@@ -6,7 +6,7 @@ const usePartyWins = (results: Result[]) => {
   const [partyWins, setPartyWins] = useState<PartyWins>({});
 
   useEffect(() => {
-    const partywins: PartyWins = results.reduce((acc, cur) => {
+    const partywins: PartyWins = results.reduce((acc: any, cur: any) => {
       if (cur.state !== 'FCT') {
         const { winner } = cur;
         if (winner in acc) {
