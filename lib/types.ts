@@ -91,6 +91,15 @@ export interface Party {
   colour: string;
 }
 
+export type PartyWins = { [party: string]: number };
+
+export interface Result {
+  state: string;
+  partyVotes: { [party: string]: number };
+  turnout: number;
+  winner: keyof ElectionsResults;
+}
+
 export interface PartyMakeup {
   [key: string]: {
     seats: number;

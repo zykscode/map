@@ -27,7 +27,7 @@ const ResultCard: FC<Props> = ({ map, data }) => {
       ssr: false,
     },
   );
-
+  console.log(selectedState);
   useEffect(() => {
     if (selectedState) {
       setWinnerLogo(() => DynamicWinnerLogo);
@@ -35,25 +35,29 @@ const ResultCard: FC<Props> = ({ map, data }) => {
   }, [selectedState]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-4 text-clip">
       <div className="relative ">
         <ResultMap set={setSelectedState} map={map} data={data} />
       </div>
-      <div className="">
-        {selectedState && (
-          <div>
-            <p>Winner: {selectedState.winner}</p>
-            <p>Turnout: {selectedState.turnout}</p>
-            <p>Party Votes: {JSON.stringify(selectedState.partyVotes)}</p>
-            {WinnerLogo && (
-              <div>
-                <p>Winner Logo:</p>
+
+      {selectedState && WinnerLogo && (
+        <div className="px-4">
+          <h2 className="title capitalize">{selectedState.state}</h2>
+          <div className="mb-4">
+            <div className=" flex items-center justify-center gap-2 bg-red-500 text-lg font-medium">
+              <div className="">Winner: {selectedState.winner}</div>
+
+              <div className="mb-4 h-4 w-4">
                 <DynamicWinnerLogo />
               </div>
-            )}
+            </div>
+            <p className="">Turnout: {selectedState.turnout}</p>
+            <p className="">
+              Party Votes: {JSON.stringify(selectedState.partyVotes)}
+            </p>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

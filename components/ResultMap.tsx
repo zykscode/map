@@ -1,3 +1,4 @@
+/* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable tailwindcss/no-custom-classname */
 
 'use client';
@@ -8,6 +9,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import type { ElectionsResults } from '#/lib/types';
 import useElectionResults from '#/lib/useElectionResults';
+import usePartyWins from '#/lib/usePartyWins';
 
 import MapPath from './New';
 
@@ -20,8 +22,15 @@ interface Props {
 
 const ResultMap: FC<Props> = ({ map, data, set }) => {
   const result = useElectionResults(data);
+  const partyWins = usePartyWins(result);
   const initialProjection = () => geoMercator().fitSize([100, 100], map);
   const [projections, setProjection] = useState(initialProjection);
+  const [partyColors, setPartyColors] = useState({
+    APC: '#e03e3e',
+    PDP: '#4d6461',
+    Other: '#9b9a97',
+  });
+
   useEffect(() => {
     function handleResize() {
       setProjection(initialProjection);
@@ -36,19 +45,16 @@ const ResultMap: FC<Props> = ({ map, data, set }) => {
   const path = geoPath().projection(projections);
 
   const containerRef = useRef<SVGSVGElement>(null);
-  const partyColors: Record<string, string> = {
-    APC: 'red',
-    PDP: 'yellow',
-    // Add more party-color pairs as needed
-    Other: 'gray',
-  };
   const handleClick = (state: any) => {
     set(state);
   };
 
-  console.log(result);
+  const handlePartyColorChange = (party: string, color: string) => {
+    setPartyColors((prevColors) => ({ ...prevColors, [party]: color }));
+  };
+
   return (
-    <div className="relative bg-blue-500">
+    <div className="relative bg-[var(--blue-background)] px-2">
       <svg ref={containerRef} viewBox="0 0 100 100">
         {' '}
         <g className="regions">
@@ -81,7 +87,30 @@ const ResultMap: FC<Props> = ({ map, data, set }) => {
           })}
         </g>
       </svg>
-      <div className="absolute bottom-0 right-0 h-1/4 w-2/5 bg-yellow-500"></div>
+      <div className="absolute bottom-0 right-0 h-1/4 w-2/5 bg-yellow-500 p-1">
+        <form className="flex flex-col">
+          <div className="flex gap-2">
+            <label className="flex gap-1">
+              APC
+              <input
+                type="color"
+                className="circle-color-input"
+                value={partyColors.APC}
+                onChange={(e) => handlePartyColorChange('APC', e.target.value)}
+              />
+            </label>
+            <label className="flex">
+              PDP
+              <input
+                className="circle-color-input"
+                type="color"
+                value={partyColors.PDP}
+                onChange={(e) => handlePartyColorChange('PDP', e.target.value)}
+              />
+            </label>
+          </div>
+        </form>{' '}
+      </div>
     </div>
   );
 };

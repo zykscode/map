@@ -38,7 +38,7 @@ const ParliamentChart = ({
 
   return (
     <div className="">
-      <h2 className="title">{name}</h2>
+      <h2 className="collection-header-title">{name}</h2>
       <div className="flex flex-col gap-6 ">
         <SeatChart parliament={updatedParty} seatCount={seatCount} />
         <PartyTable
