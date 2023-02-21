@@ -13,7 +13,7 @@ interface MapProps {
   children: (
     ReactLeaflet: any,
     Leaflet: any,
-    mapRef: React.Ref<Leaflet.Map>
+    mapRef: React.Ref<Leaflet.Map>,
   ) => React.ReactNode;
   className?: string;
   width?: string;

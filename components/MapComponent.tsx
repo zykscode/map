@@ -1,4 +1,5 @@
-import { Map, TileLayer } from 'leaflet';
+/* eslint-disable unused-imports/no-unused-vars */
+import { GeoJSON, Map, TileLayer } from 'leaflet';
 import React, { useState } from 'react';
 
 import geojson from '#/data/state.json';
@@ -34,7 +35,7 @@ function MapComponent() {
 
   return (
     <div>
-      <select title='candidate' onChange={handleCandidateChange}>
+      <select title="candidate" onChange={handleCandidateChange}>
         <option value="">Select a candidate</option>
         {candidates.map((candidate) => (
           <option key={candidate.name} value={candidate.name}>

@@ -9,9 +9,10 @@ import MapPath from './MapPath';
 
 interface Props {
   map: FeatureCollection;
+  handleClick: (stateName: string) => void;
 }
 
-const Map: FC<Props> = ({ map }) => {
+const Map: FC<Props> = ({ map, handleClick }) => {
   const initialProjection = () => geoMercator().fitSize([100, 100], map);
   const [projection, setProjection] = useState(initialProjection);
 
@@ -38,6 +39,11 @@ const Map: FC<Props> = ({ map }) => {
             key={feature.properties!.lganame || feature.properties!.adminName}
             feature={feature}
             path={path}
+            onClick={() =>
+              handleClick(
+                feature.properties!.lganame || feature.properties!.adminName,
+              )
+            }
           />
         ))}
       </g>
