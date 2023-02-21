@@ -5,6 +5,7 @@ import React from 'react';
 
 import type { Candidate } from '#/lib/types';
 
+import Map from './NewMap';
 import Options from './Options';
 
 type Props = {
@@ -14,7 +15,8 @@ type Props = {
 
 const PredictContainer = ({ options, data }: Props) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col px-4">
+      <Map data={data} options={options} />
       <Options candidates={options} />
     </div>
   );

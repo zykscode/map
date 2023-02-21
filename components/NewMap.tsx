@@ -1,5 +1,3 @@
-'use client'
-
 import { geoMercator, geoPath } from 'd3-geo';
 import type { FC } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
@@ -31,10 +29,15 @@ const Map: FC<Props> = ({ data, options }) => {
   const path = geoPath().projection(projections);
 
   const containerRef = useRef<SVGSVGElement>(null);
-  const [optionsVisible, setOptionsVisible] = useState(false);
-  const toggleOptionsTrue = () => setOptionsVisible(true);
-  const toggleOptions = () => setOptionsVisible(!optionsVisible);
-  // const toggleOptionsFlase = () => setOptionsVisible(false);
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleOptionSelected = (party: string, color: string) => {
+    setSelectedOption({
+      party,
+      color,
+    });
+  };
+
   return (
     <div className="container relative bg-green-500 lg:h-[800px] lg:w-[800px]">
       <svg ref={containerRef} viewBox="0 0 100 100">
@@ -45,15 +48,32 @@ const Map: FC<Props> = ({ data, options }) => {
               key={feature.properties!.lganame || feature.properties!.adminName}
               feature={feature}
               path={path}
-              toggleOptions={toggleOptionsTrue}
+              toggleOptions={() => setSelectedOption(null)}
+              color={
+                selectedOption &&
+                selectedOption.party === feature.properties!.party
+                  ? selectedOption.color
+                  : undefined
+              }
             />
           ))}
         </g>
       </svg>
       {
         <div className="absolute bottom-0 right-0 h-1/4 w-2/5 pb-4">
-          <div onClick={toggleOptions}>
-            {optionsVisible && <Options candidates={options} />}
+          <div
+            onClick={() =>
+              setSelectedOption(
+                selectedOption ? null : { party: '', color: '' },
+              )
+            }
+          >
+            {selectedOption && (
+              <Options
+                candidates={options}
+                onOptionSelected={handleOptionSelected}
+              />
+            )}
           </div>
         </div>
       }
