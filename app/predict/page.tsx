@@ -1,19 +1,41 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import type { FeatureCollection } from 'geojson';
 
-import PredictMap from '#/components/PredictMap';
-import data from '#/data/state.json';
+import PredictContainer from '#/components/PredictContainer';
+import { presidentialCandidates } from '#/data/candidates';
+import state from '#/data/state.json';
+import type { Candidate } from '#/lib/types';
+
+const getData = async () => {
+  const filterCandidates = (
+    candidates: Candidate[],
+    keys: (keyof Candidate)[],
+    values: (string | number | null)[][],
+  ) => {
+    return candidates.filter((candidate) =>
+      keys.every((key, index) => {
+        const value = candidate[key];
+        if (value === undefined) return false;
+        return values[index]!.includes(value);
+      }),
+    );
+  };
+  const key: (keyof Candidate)[] = ['party', 'position'];
+  const values = [['PDP', 'APC', 'NNPP', 'LP'], ['Presidential']];
+  const candidateData = filterCandidates(presidentialCandidates, key, values);
+
+  return {
+    options: candidateData,
+    data: state as FeatureCollection,
+  };
+};
 
 export default async function Home() {
+  const { options, data } = await getData();
   return (
-    <div className="page full-page   ">
-      {/* <CandidateCard name={'Tinubu'} age={70} party={'APC'}/> */}
-
-      <PredictMap data={data as FeatureCollection} />
-
-      <div className="info">
-        <span id="state-name" className="state-title"></span>
-      </div>
+    <div className="mx-auto max-w-7xl bg-green-400">
+      {/* <Map options={options} data={data} /> */}
+      <PredictContainer options={options} data={data} />
     </div>
   );
 }

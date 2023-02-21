@@ -41,10 +41,10 @@ const ResultCard: FC<Props> = ({ map, data }) => {
       </div>
 
       {selectedState && WinnerLogo && (
-        <div className="px-4">
+        <div className="overflow-hidden px-4">
           <h2 className="title capitalize">{selectedState.state}</h2>
           <div className="mb-4">
-            <div className=" flex items-center justify-center gap-2 bg-red-500 text-lg font-medium">
+            <div className=" flex items-center justify-center gap-2 text-lg font-medium">
               <div className="">Winner: {selectedState.winner}</div>
 
               <div className="mb-4 h-4 w-4">

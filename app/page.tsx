@@ -29,7 +29,7 @@ export default async function Home() {
     ],
   });
   return (
-    <main className="w-full">
+    <main className="w-full ">
       <CountdownContainer />
       <SectionCard path={'elections'} tabs={years}>
         <ResultContainer

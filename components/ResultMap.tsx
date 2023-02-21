@@ -20,8 +20,6 @@ interface Props {
   selectedStates?: any;
 }
 
-type Party = 'APC' | 'PDP' | 'Other';
-
 type PartyColors = { [key: string]: string };
 
 const ResultMap: FC<Props> = ({ map, data, set }) => {
@@ -91,7 +89,7 @@ const ResultMap: FC<Props> = ({ map, data, set }) => {
           })}
         </g>
       </svg>
-      <div className="w-3/7 absolute right-0 bottom-0 h-1/4 bg-yellow-500 px-1">
+      <div className="absolute right-0 bottom-0 h-1/4 w-[45%] bg-yellow-500 px-1">
         <div className="max-h-full overflow-auto">
           <table className="w-full text-left text-sm">
             <thead className="sticky top-0 z-50 bg-[var(--gray-background)] text-xs uppercase">
