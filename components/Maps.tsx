@@ -9,7 +9,7 @@ import MapPath from './MapPath';
 
 interface Props {
   map: FeatureCollection;
-  handleClick: (stateName: string) => void;
+  handleClick?: (stateName: string) => void;
 }
 
 const Map: FC<Props> = ({ map, handleClick }) => {
