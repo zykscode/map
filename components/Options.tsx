@@ -1,3 +1,5 @@
+/* eslint-disable unused-imports/no-unused-vars */
+/* eslint-disable no-param-reassign */
 import React, { lazy, Suspense, useMemo } from 'react';
 
 import type { Candidate } from '#/lib/types';

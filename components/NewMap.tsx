@@ -1,3 +1,4 @@
+/* eslint-disable unused-imports/no-unused-vars */
 import { geoMercator, geoPath } from 'd3-geo';
 import type { FC } from 'react';
 import React, { useState } from 'react';
@@ -8,14 +9,14 @@ import MapPath from './MapPath';
 
 interface Props {
   data: GeoJSON.FeatureCollection;
-  options: Candidate[];
+  options?: Candidate[];
 }
 
 interface StateColor {
   [state: string]: string;
 }
 
-const Map: FC<Props> = ({ data, options }) => {
+const Map: FC<Props> = ({ data }) => {
   const initialProjection = () => geoMercator().fitSize([100, 100], data);
   const [projections, setProjection] = useState(initialProjection);
   const [stateColors, setStateColors] = useState<StateColor>({});

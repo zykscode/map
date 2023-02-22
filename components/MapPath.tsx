@@ -1,4 +1,3 @@
-/* eslint-disable tailwindcss/no-custom-classname */
 import type { GeoPath, GeoPermissibleObjects } from 'd3-geo';
 import type { Feature, GeoJsonProperties, Geometry } from 'geojson';
 import React, { useRef, useState } from 'react';
@@ -11,7 +10,7 @@ interface MapPathProps {
     | GeoPath<any, GeoPermissibleObjects>
     | ((arg0: Feature<Geometry, GeoJsonProperties>) => string | undefined);
   // An optional click handler for the path
-  onClick?: (event: React.MouseEvent<SVGPathElement>) => void;
+  onClick?: (name: string, event: React.MouseEvent<SVGPathElement>) => void;
   toggleOptions?: any;
   color?: string;
   partyColor?: any;
@@ -27,17 +26,21 @@ const MapPath: React.FC<MapPathProps> = ({
   const pathRef = useRef<SVGPathElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+
+  const handleClick = (event: React.MouseEvent<SVGPathElement>) => {
+    const name = lganame || adminName;
+    if (onClick) {
+      onClick(name, event);
+    }
+    setIsClicked(!isClicked);
+  };
+
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
+
   const handleMouseLeave = () => {
     setIsHovered(false);
-  };
-  const handleClick = () => {
-    if (onClick) {
-      onClick();
-    }
-    setIsClicked(!isClicked);
   };
 
   return (

@@ -39,7 +39,7 @@ const PredictContainer = ({ options, data }: Props) => {
   const handleClick = (name: string) => {
     const data = states.find((d) => d.state === name);
     data!.male = data!.total - data!.female;
-    console.log('clicked')
+    console.log('clicked');
     setSelectedOption(data);
   };
 
@@ -65,13 +65,7 @@ const PredictContainer = ({ options, data }: Props) => {
                 }
                 feature={feature}
                 path={path}
-                onClick={() =>
-                  handleClick(
-                    feature.properties!.lganame ||
-                      feature.properties!.adminName,
-                    selectedCandidate,
-                  )
-                }
+                onClick={handleClick}
                 partyColor={selectedCandidate}
               />
             ))}
