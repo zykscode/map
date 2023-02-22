@@ -14,29 +14,42 @@ interface MapPathProps {
   onClick?: (event: React.MouseEvent<SVGPathElement>) => void;
   toggleOptions?: any;
   color?: string;
+  partyColor?: any;
 }
 
-const MapPath: React.FC<MapPathProps> = ({ feature, path, color, onClick }) => {
-  const id = feature.properties!.lganame || feature.properties!.adminName;
+const MapPath: React.FC<MapPathProps> = ({
+  feature,
+  path,
+  onClick,
+  partyColor,
+}) => {
+  const { lganame, adminName } = feature.properties!;
   const pathRef = useRef<SVGPathElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    }
+    setIsClicked(!isClicked);
+  };
 
   return (
     <path
       ref={pathRef}
-      id={id}
-      fill={color}
+      id={lganame || adminName}
+      fill={isClicked ? partyColor : 'pink'}
       d={path(feature)!}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={` region fill-[var(--blue-background)]  stroke-[black] stroke-[0.1px] hover:fill-gray-300`}
-      onClick={onClick}
+      className={`region stroke-[black] stroke-[0.1px] hover:fill-gray-300`}
+      onClick={handleClick}
     >
       {isHovered && (
         <title>

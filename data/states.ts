@@ -169,7 +169,7 @@ export const states = [
     total: 1695927,
   },
   {
-    state: 'NasaraFwa',
+    state: 'Nasarawa',
     party: 'APC',
     female: 915958,
     total: 1899244,
@@ -181,7 +181,7 @@ export const states = [
     total: 2032041,
   },
   {
-    state: 'Kastina',
+    state: 'Katsina',
     party: 'APC',
     female: 1729355,
     total: 3516719,

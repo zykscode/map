@@ -10,17 +10,11 @@ import { states } from '#/data/states';
 import type { Candidate } from '#/lib/types';
 
 import MapPath from './MapPath';
+import Options from './Options';
 
 type Props = {
   data: FeatureCollection;
   options: Candidate[];
-};
-
-type VoterData = {
-  state: string;
-  female: number;
-  total: number;
-  party: string;
 };
 
 const PredictContainer = ({ options, data }: Props) => {
@@ -41,34 +35,56 @@ const PredictContainer = ({ options, data }: Props) => {
 
   const containerRef = useRef<SVGSVGElement>(null);
   const [selectedOption, setSelectedOption] = useState();
-
+  const [selectedCandidate, setSelectedCandidate] = useState();
   const handleClick = (name: string) => {
     const data = states.find((d) => d.state === name);
     data!.male = data!.total - data!.female;
+    console.log('clicked')
     setSelectedOption(data);
   };
 
-  console.log(selectedOption);
+  const [partyColors, setPartyColors] = useState<Record<string, string>>({
+    APC: '#e03e3e',
+    PDP: '#4d6461',
+    LP: '#5b9b4c',
+    NNPP: '#8b5cf6',
+  });
+  const handleChangeColor = (party: string, color: string) => {
+    setPartyColors((prevColors) => ({ ...prevColors, [party]: color }));
+  };
 
   return (
-    <div className="flex flex-col px-4">
-      <svg ref={containerRef} viewBox="0 0 100 100">
-        <g className="regions">
-          {data.features.map((feature) => (
-            <MapPath
-              key={feature.properties!.lganame || feature.properties!.adminName}
-              feature={feature}
-              path={path}
-              onClick={() =>
-                handleClick(
-                  feature.properties!.lganame || feature.properties!.adminName,
-                )
-              }
-            />
-          ))}
-        </g>
-      </svg>
-      <div className="container w-full bg-blue-500">
+    <div className="flex h-screen flex-col px-4 lg:flex-row">
+      <div className="w-full lg:max-w-[700px]">
+        <svg ref={containerRef} viewBox="0 0 100 100">
+          <g className="regions">
+            {data.features.map((feature) => (
+              <MapPath
+                key={
+                  feature.properties!.lganame || feature.properties!.adminName
+                }
+                feature={feature}
+                path={path}
+                onClick={() =>
+                  handleClick(
+                    feature.properties!.lganame ||
+                      feature.properties!.adminName,
+                    selectedCandidate,
+                  )
+                }
+                partyColor={selectedCandidate}
+              />
+            ))}
+          </g>
+        </svg>
+        <Options
+          candidates={options}
+          partyColors={partyColors}
+          handleColorChange={handleChangeColor}
+          handleCandidateClick={setSelectedCandidate}
+        />
+      </div>
+      <div className=" bg-blue-500">
         {selectedOption && (
           <div>
             <p>State: {selectedOption.state}</p>
