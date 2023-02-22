@@ -40,6 +40,7 @@ const Map: FC<Props> = ({ map, handleClick }) => {
             feature={feature}
             path={path}
             onClick={() =>
+              handleClick &&
               handleClick(
                 feature.properties!.lganame || feature.properties!.adminName,
               )
