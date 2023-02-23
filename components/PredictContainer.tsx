@@ -34,13 +34,22 @@ const PredictContainer = ({ options, data }: Props) => {
   const path = geoPath().projection(projections);
 
   const containerRef = useRef<SVGSVGElement>(null);
-  const [selectedOption, setSelectedOption] = useState();
+  const [selectedOption, setSelectedOption] = useState<
+    | {
+        state: string;
+        party: string;
+        female: number;
+        total: number;
+        male?: number;
+      }
+    | undefined
+  >();
   const [selectedCandidate, setSelectedCandidate] = useState();
   const handleClick = (name: string) => {
-    const data = states.find((d) => d.state === name);
-    data!.male = data!.total - data!.female;
+    const datas = states.find((d) => d.state === name);
+    datas!.male = datas!.total - datas!.female;
     console.log('clicked');
-    setSelectedOption(data);
+    setSelectedOption(datas);
   };
 
   const [partyColors, setPartyColors] = useState<Record<string, string>>({
@@ -84,7 +93,7 @@ const PredictContainer = ({ options, data }: Props) => {
             <p>State: {selectedOption.state}</p>
             <p>Registered Voters: {selectedOption.total}</p>
             <p>
-              Male Percentage: {selectedOption.male / selectedOption.total}%
+              Male Percentage: {selectedOption.male! / selectedOption.total}%
             </p>
             <p>
               Female Percentage: {selectedOption.female / selectedOption.total}%
