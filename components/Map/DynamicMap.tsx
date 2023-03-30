@@ -1,4 +1,7 @@
 /* eslint-disable no-underscore-dangle */
+
+'use client';
+
 import 'leaflet/dist/leaflet.css';
 
 import Leaflet from 'leaflet';

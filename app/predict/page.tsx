@@ -1,10 +1,10 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import type { FeatureCollection } from 'geojson';
 
-import PredictContainer from '#/components/PredictContainer';
 import { presidentialCandidates } from '#/data/candidates';
 import state from '#/data/state.json';
 import type { Candidate } from '#/lib/types';
+import PredictContainer from '#/ui/PredictContainer';
 
 const getData = async () => {
   const filterCandidates = (

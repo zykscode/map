@@ -13,7 +13,7 @@ type Props = {
 
 const SectionCard = ({ children, tabs, path }: Props) => {
   return (
-    <div className="">
+    <div className="flex w-full flex-col px-2">
       <TabGroup
         path={`/${path}`}
         items={[

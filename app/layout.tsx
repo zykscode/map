@@ -3,8 +3,8 @@ import '#/styles/globals.css';
 import '#/styles/style.scss';
 import '#/styles/leaflet.css';
 
-import { Footer } from '#/components/Footer';
-import Header from '#/components/header/Header';
+import { Footer } from '#/ui/Footer';
+import Header from '#/ui/header/Header';
 
 export default function RootLayout({
   children,

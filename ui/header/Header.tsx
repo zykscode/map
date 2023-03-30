@@ -1,7 +1,7 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import React from 'react';
 
-import Breadcrumbs from '../Breaadcrumbs';
+import Breadcrumbs from '../Breadcrumbs';
 import Navbar from './Navbar';
 
 export default function Header() {

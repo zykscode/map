@@ -2,9 +2,8 @@
 import Link from 'next/link';
 import React from 'react';
 
+import ToggleThemeButton from '#/components/ToggleThemeButton';
 import { navs } from '#/data/siteMetadata';
-
-import ToggleThemeButton from '../ToggleThemeButton';
 
 const Navbar = () => {
   return (

@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 
 import type { Party } from '#/lib/types';
 
-import ParliamentChart from './ParliamentChart';
+import ParliamentChart from '../components/ParliamentChart';
 import ResultCard from './ResultCard';
 
 type Props = {
@@ -37,7 +37,7 @@ const ResultContainer = ({ data, map, repParties, senateParties }: Props) => {
     selectedValue === 'senate' ? 'Senate' : 'House of Representatives';
 
   return (
-    <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 md:px-8 medium:grid-cols-2">
+    <div className="mx-auto w-full grid grid-cols-1 gap-8 bg-green-300 px-4 md:px-8 lg:grid-cols-2">
       <div className="order-2">
         <div className="flex flex-col justify-center gap-4 p-4">
           {isMobile ? (
@@ -72,6 +72,7 @@ const ResultContainer = ({ data, map, repParties, senateParties }: Props) => {
                 <ParliamentChart
                   name="Senate"
                   seatCount={true}
+                  table={false}
                   party={senateParties}
                 />
               </div>
@@ -80,6 +81,7 @@ const ResultContainer = ({ data, map, repParties, senateParties }: Props) => {
                   name="House of Representatives"
                   seatCount={true}
                   party={repParties}
+                  table={true}
                 />
               </div>
             </div>

@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 
 import type { ElectionsResults } from '#/lib/types';
 
-import ResultMap from './ResultMap';
+import ResultMap from '../components/ResultMap';
 
 interface Props {
   map: GeoJSON.FeatureCollection;

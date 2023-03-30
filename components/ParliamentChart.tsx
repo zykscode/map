@@ -14,10 +14,12 @@ const ParliamentChart = ({
   party,
   seatCount,
   name,
+  table,
 }: {
   party: Party[];
   seatCount?: boolean;
   name: string;
+  table?: boolean;
 }) => {
   const [partyColors, setPartyColors] = useState(() => {
     const initialColors: any = {};
@@ -41,11 +43,13 @@ const ParliamentChart = ({
       <h2 className="collection-header-title">{name}</h2>
       <div className="flex flex-col gap-6 ">
         <SeatChart parliament={updatedParty} seatCount={seatCount} />
-        <PartyTable
-          party={party}
-          partyColors={partyColors}
-          handleColorChange={handleColorChange}
-        />
+        {table && (
+          <PartyTable
+            party={party}
+            partyColors={partyColors}
+            handleColorChange={handleColorChange}
+          />
+        )}
       </div>
     </div>
   );

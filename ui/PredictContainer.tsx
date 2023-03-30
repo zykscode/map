@@ -9,8 +9,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { states } from '#/data/states';
 import type { Candidate } from '#/lib/types';
 
-import MapPath from './MapPath';
-import Options from './Options';
+import MapPath from '../components/MapPath';
+import Options from '../components/Options';
 
 type Props = {
   data: FeatureCollection;
@@ -20,6 +20,7 @@ type Props = {
 const PredictContainer = ({ options, data }: Props) => {
   const initialProjection = () => geoMercator().fitSize([100, 100], data);
   const [projections, setProjection] = useState(initialProjection);
+
   useEffect(() => {
     function handleResize() {
       setProjection(initialProjection);
@@ -32,24 +33,20 @@ const PredictContainer = ({ options, data }: Props) => {
   }, []);
 
   const path = geoPath().projection(projections);
-
   const containerRef = useRef<SVGSVGElement>(null);
-  const [selectedOption, setSelectedOption] = useState<
-    | {
-        state: string;
-        party: string;
-        female: number;
-        total: number;
-        male?: number;
-      }
-    | undefined
-  >();
-  const [selectedCandidate, setSelectedCandidate] = useState();
+  const [selectedState, setSelectedState] = useState<{
+    state: string;
+    party: string;
+    female: number;
+    total: number;
+    male?: number;
+  }>();
+  const [selectedCandidate, setSelectedCandidate] = useState<Candidate>();
   const handleClick = (name: string) => {
     const datas = states.find((d) => d.state === name);
     datas!.male = datas!.total - datas!.female;
     console.log('clicked');
-    setSelectedOption(datas);
+    setSelectedState(datas);
   };
 
   const [partyColors, setPartyColors] = useState<Record<string, string>>({
@@ -70,7 +67,7 @@ const PredictContainer = ({ options, data }: Props) => {
             {data.features.map((feature) => (
               <MapPath
                 key={
-                  feature.properties!.lganame || feature.properties!.adminName
+                  feature.properties?.lganame || feature.properties?.adminName
                 }
                 feature={feature}
                 path={path}
@@ -88,15 +85,14 @@ const PredictContainer = ({ options, data }: Props) => {
         />
       </div>
       <div className=" bg-blue-500">
-        {selectedOption && (
+        {selectedState && (
           <div>
-            <p>State: {selectedOption.state}</p>
-            <p>Registered Voters: {selectedOption.total}</p>
+            <p>State: {selectedState.state}</p>
+            <p>Registered Voters: {selectedState.total}</p>
+            <p>Registered Voters: {selectedState.total}</p>
+            <p>Male Percentage: {selectedState.male! / selectedState.total}%</p>
             <p>
-              Male Percentage: {selectedOption.male! / selectedOption.total}%
-            </p>
-            <p>
-              Female Percentage: {selectedOption.female / selectedOption.total}%
+              Female Percentage: {selectedState.female / selectedState.total}%
             </p>
           </div>
         )}

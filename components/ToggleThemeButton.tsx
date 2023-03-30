@@ -6,8 +6,7 @@ import { useTheme } from 'next-themes';
 import React, { useState } from 'react';
 
 import { useDarkMode } from '#/lib/use-dark-mode';
-
-import styles from './styles.module.css';
+import styles from '#/ui/styles.module.css';
 
 const ToggleThemeButton = () => {
   const [hasMounted, setHasMounted] = useState(false);

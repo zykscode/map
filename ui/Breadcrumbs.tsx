@@ -1,7 +1,7 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import React from 'react';
 
-import Logo from './Logo';
+import Logo from '#/components/Logo';
 
 const Breadcrumbs = () => {
   console.log({ todo: 'add site name' });

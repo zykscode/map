@@ -1,6 +1,7 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import type { GeoPath, GeoPermissibleObjects } from 'd3-geo';
 import type { Feature, GeoJsonProperties, Geometry } from 'geojson';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface MapPathProps {
   // The GeoJSON feature to render
@@ -26,6 +27,15 @@ const MapPath: React.FC<MapPathProps> = ({
   const pathRef = useRef<SVGPathElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+  const [currentPartyColor, setCurrentPartyColor] = useState<
+    string | undefined
+  >(undefined);
+
+  useEffect(() => {
+    if (isClicked) {
+      setCurrentPartyColor(partyColor);
+    }
+  }, [isClicked, partyColor]);
 
   const handleClick = (event: React.MouseEvent<SVGPathElement>) => {
     const name = lganame || adminName;
@@ -33,6 +43,7 @@ const MapPath: React.FC<MapPathProps> = ({
       onClick(name, event);
     }
     setIsClicked(!isClicked);
+    setCurrentPartyColor(partyColor);
   };
 
   const handleMouseEnter = () => {
@@ -47,11 +58,11 @@ const MapPath: React.FC<MapPathProps> = ({
     <path
       ref={pathRef}
       id={lganame || adminName}
-      fill={isClicked ? partyColor : 'pink'}
+      fill={isClicked ? partyColor : currentPartyColor || 'pink'}
       d={path(feature)!}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`region stroke-[black] stroke-[0.1px] hover:fill-gray-300`}
+      className={`region stroke-[black] stroke-[0.1px] `}
       onClick={handleClick}
     >
       {isHovered && (
